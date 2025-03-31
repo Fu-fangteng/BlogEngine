@@ -1,3 +1,5 @@
+import "../css/BlogCard.css";
+
 function BlodCard({ blog }) {
   function onFavouriteClick() {
     alert("Click");
@@ -5,7 +7,7 @@ function BlodCard({ blog }) {
 
   return (
     <div className="blog-card">
-      <div className="blog-image">
+      <div className="blog-poster">
         <img src={blog.url} alt={blog.title} />
         <div className="blog-overlay">
           <button className="favourite-btn" onClick={onFavouriteClick}>

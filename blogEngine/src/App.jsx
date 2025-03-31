@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
+import "./css/App.css";
 
 import BlogCard from "./components/blogcard";
 import Home from "./pages/Home";
