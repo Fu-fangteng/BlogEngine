@@ -1,26 +1,9 @@
 import BlogCard from "../components/blogcard";
-import { useEffect, useState } from "react";
-import { searchBlogs, getPopularBlogs } from "../services/api";
+import { useState } from "react";
 import "../css/Home.css";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
-  //   const [blogs, setBlogs] = useState([]);
-  //   const [err, setError] = useState(null);
-  //   const [loading, setLoading] = useState(true);
-  //   useEffect(() => {
-  //     const loadPopularBlogs = async () => {
-  //       try {
-  //         const popularBlogs = await getPopularBlogs();
-  //         setBlogs(popularBlogs);
-  //       } catch (err) {
-  //         console.log(err);
-  //         setError("Failed to load Movies...");
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     };
-  //   });
 
   const blogs = [
     { id: 1, title: "SVM Intro", label: "MachineLearning_SVM" },
