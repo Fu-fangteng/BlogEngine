@@ -1,21 +1,50 @@
 import BlogCard from "../components/blogcard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../css/Home.css";
+import { getPopularBlogs, searchBlogs } from "../services/api";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const blogs = [
-    { id: 1, title: "SVM Intro", label: "MachineLearning_SVM" },
-    { id: 2, title: "LR Intro", label: "MachineLearning_LinearRegression" },
-    { id: 3, title: "LC Intro", label: "MachineLearning_LInearClassification" },
-    { id: 4, title: "PR Intro", label: "MachineLearning_PolynomialRegression" },
-  ];
+  useEffect(() => {
+    const loadBlogs = async () => {
+      try {
+        const data = await getPopularBlogs();
+        setBlogs(data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load Blogs...");
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadBlogs();
+  }, []);
+
+  if (loading) return <p>Loading</p>;
+  if (error) return <p>{error}</p>;
 
   const handleSearch = (e) => {
     e.preventDefault();
-    alert(searchQuery);
-    setSearchQuery("");
+    if (!searchQuery.trim()) return;
+    if (loading) return;
+    setLoading(true);
+    try {
+      const searchResult = searchBlogs(searchQuery);
+      setBlogs(searchResult);
+      setError(null);
+    } catch (err) {
+      console.log(err);
+      setError("Failed to search movies....");
+    } finally {
+      setLoading(false);
+    }
+
+    // Use to set search bar into empty
+    // setSearchQuery("");
   };
 
   return (
@@ -33,14 +62,20 @@ function Home() {
         </button>
       </form>
 
-      <div className="blog-grid">
-        {blogs.map(
-          (blog) =>
-            blog.title.toLowerCase().startsWith(searchQuery) && (
-              <BlogCard blog={blog} key={blog.id} />
-            )
-        )}
-      </div>
+      {error && <div className="error-message">{error}</div>}
+
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <div className="blog-grid">
+          {blogs.map(
+            (blog) =>
+              blog.title.toLowerCase().startsWith(searchQuery) && (
+                <BlogCard blog={blog} key={blog.id} />
+              )
+          )}
+        </div>
+      )}
     </div>
   );
 }

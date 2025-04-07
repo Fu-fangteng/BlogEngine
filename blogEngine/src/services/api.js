@@ -2,7 +2,7 @@ import blogs from "../data/blogs"
 
 export const getPopularBlogs = async () => {
     return new Promise((reslove) => {
-        setTimeout(() => reslove(blogs), 500)
+        setTimeout(() => reslove(blogs), 200)
     });
 
 };
@@ -15,7 +15,7 @@ export const searchBlogs = async (query) => {
                 blog.title.toLowerCase().includes(query.toLowerCase())
             )
             reslove(filterBlogs)
-        }, 500);
+        }, 200);
     })
     
 }

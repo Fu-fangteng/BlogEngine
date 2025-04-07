@@ -31,14 +31,14 @@
 .search-button {
   padding: 0.75rem 1.5rem;
   background-color: #e50914;
-  color: rgb(244, 83, 83);
+  color: white;
   border-radius: 4px;
   font-weight: 500;
   transition: background-color 0.2s;
   white-space: nowrap;
 }
 
-.search-btn:hover {
+.search-button:hover {
   background-color: #f40612;
 }
 

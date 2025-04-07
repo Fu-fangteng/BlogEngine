@@ -1,6 +1,6 @@
 import "../css/BlogCard.css";
 
-function BlodCard({ blog }) {
+function BlogCard({ blog }) {
   function onFavouriteClick() {
     alert("Click");
   }
@@ -8,9 +8,9 @@ function BlodCard({ blog }) {
   return (
     <div className="blog-card">
       <div className="blog-poster">
-        <img src={blog.url} alt={blog.title} />
+        <img src={blog.imageUrl} alt={blog.title} />
         <div className="blog-overlay">
-          <button className="favourite-btn" onClick={onFavouriteClick}>
+          <button className="favorite-btn" onClick={onFavouriteClick}>
             ♥
           </button>
         </div>
@@ -23,4 +23,4 @@ function BlodCard({ blog }) {
   );
 }
 
-export default BlodCard;
+export default BlogCard;
